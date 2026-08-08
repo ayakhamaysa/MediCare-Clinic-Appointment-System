@@ -1,0 +1,15 @@
+{
+  "name": "clinic-aya",
+  "compatibility_date": "2026-07-19",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "clinic-aya",
+      "database_id": "07a73eb7-14d4-4c14-8258-e1ee7395e998",
+      "migrations_dir": "drizzle"
+    }
+  ]
+}

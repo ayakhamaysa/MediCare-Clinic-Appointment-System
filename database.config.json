@@ -1,0 +1,5 @@
+{
+  "workerName": "medicare-clinic",
+  "databaseName": "medicare-clinic-db",
+  "databaseId": "YOUR_CLOUDFLARE_D1_DATABASE_ID"
+}

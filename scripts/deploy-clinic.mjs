@@ -1,0 +1,15 @@
+import fs from "node:fs";
+import { compatibilityDate, loadDatabaseConfig, run, writeWrangler } from "./config-utils.mjs";
+const config = loadDatabaseConfig();
+writeWrangler(config);
+console.log("\nبناء الموقع...\n");
+run("npx", ["vinext", "build"]);
+const outputPath = "dist/server/wrangler.json";
+const output = JSON.parse(fs.readFileSync(outputPath, "utf8"));
+output.name = config.workerName;
+output.compatibility_date = compatibilityDate();
+output.compatibility_flags = [...new Set(output.compatibility_flags ?? ["nodejs_compat"])];
+output.d1_databases = [{ binding: "DB", database_name: config.databaseName, database_id: config.databaseId }];
+fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
+console.log("\nنشر الموقع...\n");
+run("npx", ["wrangler", "deploy", "--config=dist/server/wrangler.json"]);
